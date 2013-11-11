@@ -4,8 +4,10 @@
 
 class KaossProgram {
 public:
-	KaossProgram(const PortMidiStream *_messageStream);
+	KaossProgram();
 	~KaossProgram();
+
+	void initialize(const PortMidiStream *_messageStream);
 
 	void setProgram(uint8_t program);
 	void nextProgram();
@@ -17,33 +19,5 @@ private:
 
 	const PortMidiStream *messageStream;
 };
-
-KaossProgram::KaossProgram(const PortMidiStream *_messageStream) 
-	: programBlock(0), activeProgram(0), messageStream(_messageStream)
-{}
-
-KaossProgram::~KaossProgram() {
-	messageStream = NULL;
-}
-
-void KaossProgram::setProgram(uint8_t program) {
-	activeProgram = program;
-	uploadState();
-}
-
-void KaossProgram::nextProgram() {
-	activeProgram++;
-	uploadState();
-}
-
-void KaossProgram::previousProgram() {
-	activeProgram--;
-	uploadState();
-}
-
-void KaossProgram::uploadState() {
-	uint32_t msg = Pm_Message(ProgramChange, activeProgram, programBlock);
-	Pm_WriteShort(messageStream, 0, msg);
-}
 
 #endif
