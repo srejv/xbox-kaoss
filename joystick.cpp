@@ -52,13 +52,14 @@ int main()
             printf("%d: %s \n", i, info->name);
     }*/
     int device = 2;
-    Pt_Start(1, NULL, NULL);
+    /*Pt_Start(1, NULL, NULL);
     bool isinit = midi.initialize(device);
     if(isinit) {
         printf("INITIALIZED KAOSS\n");
-    }
+    }*/
 
     sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    window.setJoystickThreshold(1);
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
@@ -69,22 +70,26 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if (event.type == sf::Event::JoystickMoved) {
+                printf("joystick: %d. AXIS: %d, val: %f\n", event.joystickMove.joystickId, event.joystickMove.axis, event.joystickMove.position);
+            } 
         }
 
 
-        if (sf::Joystick::isConnected(0))
+        /*if (sf::Joystick::isConnected(0))
         {
             
             handleJoystickInput();
 
-        }
+        }*/
 
         window.clear();
         window.draw(shape);
         window.display();
     }
 
-    midi.cleanup();
+    //midi.cleanup();
     Pm_Terminate();
 
     return 0;
