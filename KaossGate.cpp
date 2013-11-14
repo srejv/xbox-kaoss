@@ -1,10 +1,15 @@
 
 #include "KaossGate.h"
+#include "KaossMisc.h"
 
 KaossGate::KaossGate() 
 	: isActive(false) {}
 
 KaossGate::~KaossGate() {}
+
+void KaossGate::initialize(PortMidiStream *_messageStream) {
+	messageStream = _messageStream;
+}
 
 void KaossGate::setTime(uint8_t _time) {
 	currentTime = _time;
@@ -22,8 +27,8 @@ void KaossGate::decreaseTime() {
 }
 
 void KaossGate::uploadTime() {
-	uint32_t msg = Pm_Message(MD_CC, KaossGate::GateTime, currentTime);
-	Pm_WriteShort(mstream, 0, msg);
+	uint32_t msg = Pm_Message(MidiConstants::ControlChange, MidiConstants::GateTime, currentTime);
+	Pm_WriteShort(messageStream, 0, msg);
 }
 
 
@@ -43,8 +48,8 @@ void KaossGate::decreaseSpeed() {
 }
 
 void KaossGate::uploadSpeed() {
-	uint32_t msg = Pm_Message(MD_CC, KaossGate::GateSpeed, currentSpeed);
-	Pm_WriteShort(mstream, 0, msg);
+	uint32_t msg = Pm_Message(MidiConstants::ControlChange, MidiConstants::GateSpeed, currentSpeed);
+	Pm_WriteShort(messageStream, 0, msg);
 }
 
 void KaossGate::activate() {
@@ -60,7 +65,7 @@ void KaossGate::deactivate() {
 }
 void KaossGate::toggle() {
 	uint8_t value = isActive ? 0 : 127;
-	uint32_t msg = Pm_Message(MD_CC, KaossGate::GateArp, value);
+	uint32_t msg = Pm_Message(MidiConstants::ControlChange, MidiConstants::GateArp, value);
 	Pm_WriteShort(messageStream, 0, msg);
 	isActive = !isActive;
 }

@@ -1,15 +1,16 @@
 
 #include "KaossProgram.h"
+#include "KaossMisc.h"
+
 
 KaossProgram::KaossProgram() 
-	: programBlock(0), activeProgram(0), messageStream(NULL)
+	: programBlock(0), activeProgram(0)
 {}
 
 KaossProgram::~KaossProgram() {
-	messageStream = NULL;
 }
 
-void KaossProgram::initialize(const PortMidiStream *_messageStream) {
+void KaossProgram::initialize(PortMidiStream *_messageStream) {
 	messageStream = _messageStream;
 }
 
@@ -29,6 +30,7 @@ void KaossProgram::previousProgram() {
 }
 
 void KaossProgram::uploadState() {
-	uint32_t msg = Pm_Message(ProgramChange, activeProgram, programBlock);
+	int type = (int)(MidiConstants::ProgramChange);
+	uint32_t msg = Pm_Message(type, activeProgram, programBlock);
 	Pm_WriteShort(messageStream, 0, msg);
 }

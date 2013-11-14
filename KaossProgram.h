@@ -2,12 +2,14 @@
 #ifndef __KAOSS_PROGRAM__
 #define __KAOSS_PROGRAM__
 
+#include <portmidi.h>
+
 class KaossProgram {
 public:
 	KaossProgram();
 	~KaossProgram();
 
-	void initialize(const PortMidiStream *_messageStream);
+	void initialize(PortMidiStream *_messageStream);
 
 	void setProgram(uint8_t program);
 	void nextProgram();
@@ -17,7 +19,7 @@ private:
 	uint8_t programBlock;
 	uint8_t activeProgram;
 
-	const PortMidiStream *messageStream;
+	PortMidiStream *messageStream;
 };
 
 #endif

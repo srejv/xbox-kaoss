@@ -1,5 +1,6 @@
 
 #include "KaossLoops.h"
+#include "KaossMisc.h"
 
 KaossLoops::KaossLoops() {
 	isActive[0] = false;
@@ -11,37 +12,38 @@ KaossLoops::KaossLoops() {
 KaossLoops::~KaossLoops() {
 }
 
-KaossLoops::initialize(const PortMidiStream *_messageStream) {
-	messageStream = _messageStream
-}
-KaossLoops::cleanup() {
-
+void KaossLoops::initialize(PortMidiStream *_messageStream) {
+	messageStream = _messageStream;
 }
 
-void KaossLoops::activate(Loop loop) {
+void KaossLoops::cleanup() {
+}
+
+void KaossLoops::activate(MidiConstants::Loop loop) {
 	int id = loopToId(loop);
 	if(!isActive[id]) {
 		toggle(loop);
 	}
 }
 
-void  KaossLoops::deactivate(Loop loop) {
+void  KaossLoops::deactivate(MidiConstants::Loop loop) {
 	int id = loopToId(loop);
 	if(isActive[id]) {
 		toggle(loop);
 	}
 }
 
-void KaossLoops::toggle(Loop loop) {
-	uint32_t msg = Pm_Message(MD_NOTEON, loopToNote(loop), 127);
+void KaossLoops::toggle(MidiConstants::Loop loop) {
+	uint32_t msg = Pm_Message(MidiConstants::NoteOn, loopToNote(loop), 127);
 	Pm_WriteShort(messageStream, 0, msg);
+	int id = loopToId(loop);
 	isActive[id] = !isActive[id];
 }
 
-int KaossLoops::loopToId(Loop loop) {
-	return loop - 35;
+int KaossLoops::loopToId(MidiConstants::Loop loop) {
+	return loop - MidiConstants::LoopA;
 }
-
-int KaossLoops::loopToNote(Loop loop) {
+ 
+int KaossLoops::loopToNote(MidiConstants::Loop loop) {
 	return loop;
 }

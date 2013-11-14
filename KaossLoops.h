@@ -2,6 +2,7 @@
 #ifndef __KAOSS_LOOPS__
 #define __KAOSS_LOOPS__
 
+#include <portmidi.h>
 #include "KaossMisc.h"
 
 class KaossLoops
@@ -10,22 +11,19 @@ public:
 	KaossLoops();
 	~KaossLoops();
 
-	void initialize(const PortMidiStream *_messageStream);
+	void initialize(PortMidiStream *_messageStream);
+	void cleanup();
 
-	void activate(uint8_t loop);
-	void deactivate(uint8_t loop);
-	void toggle(uint8_t loop);
+	void activate(MidiConstants::Loop loop);
+	void deactivate(MidiConstants::Loop loop);
+	void toggle(MidiConstants::Loop loop);
 
-	static const uint8_t LoopA = 36;
-	static const uint8_t LoopB = 37;
-	static const uint8_t LoopC = 38;
-	static const uint8_t LoopD = 39;
 private:
 	bool isActive[4];
 	PortMidiStream *messageStream;
 
-	int loopToId(Loop loop);
-	int loopToNote(Loop loop);
+	int loopToId(MidiConstants::Loop loop);
+	int loopToNote(MidiConstants::Loop loop);
 };
 
 #endif

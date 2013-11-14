@@ -1,6 +1,8 @@
 
 #include "KaossPad.h"
 
+#include "KaossMisc.h"
+
 KaossPad::KaossPad()
 	: x(0), y(0)
 {
@@ -10,11 +12,11 @@ KaossPad::~KaossPad()
 {
 }
 
-void KaossPad::initialize(const PortMidiStream *_messageStream) {
+void KaossPad::initialize(PortMidiStream *_messageStream) {
 	messageStream = _messageStream;
 }
 
-void setPosition(uint8_t _x, uint8_t _y) {
+void KaossPad::setPosition(uint8_t _x, uint8_t _y) {
 	x = _x;
 	y = _y;
 	sendX(); 
@@ -32,21 +34,21 @@ void KaossPad::addToY(uint8_t deltaY) {
 }
 
 void KaossPad::sendX() {
-	uint8_t msg = Pm_Message(MD_CC, KaossPad::PadX, x);
-	Pm_WriteShort(mstream, 0, msg);
+	uint32_t msg = Pm_Message(MidiConstants::ControlChange, MidiConstants::PadX, x);
+	Pm_WriteShort(messageStream, 0, msg);
 }
 
 void KaossPad::sendY() {
-	uint8_t msg = Pm_Message(MD_CC, KaossPad::PadY, y);
-	Pm_WriteShort(mstream, 0, msg);	
+	uint32_t msg = Pm_Message(MidiConstants::ControlChange, MidiConstants::PadY, y);
+	Pm_WriteShort(messageStream, 0, msg);	
 }
 
 void KaossPad::touch(uint8_t velocity) {
-	msg = Pm_Message(MD_CC, KaossPad::PadTouch, velocity);
-	Pm_WriteShort(mstream, 0, msg);
+	uint32_t msg = Pm_Message(MidiConstants::ControlChange, MidiConstants::PadTouch, velocity);
+	Pm_WriteShort(messageStream, 0, msg);
 }
 
 void KaossPad::release() {
-	msg = Pm_Message(MD_CC, KaossPad::PadTouch, 0);
-	Pm_WriteShort(mstream, 0, msg);	
+	uint32_t msg = Pm_Message(MidiConstants::ControlChange, MidiConstants::PadTouch, 0);
+	Pm_WriteShort(messageStream, 0, msg);	
 }
