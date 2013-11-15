@@ -4,7 +4,7 @@
 
 
 KaossProgram::KaossProgram() 
-	: programBlock(0), activeProgram(0)
+	: programBlock(1), activeProgram(0)
 {}
 
 KaossProgram::~KaossProgram() {
@@ -21,11 +21,18 @@ void KaossProgram::setProgram(uint8_t program) {
 
 void KaossProgram::nextProgram() {
 	activeProgram++;
+	if(activeProgram > 126) {
+		activeProgram = 0;
+	}
 	uploadState();
 }
 
 void KaossProgram::previousProgram() {
-	activeProgram--;
+	if(activeProgram == 0) {
+		activeProgram = 127;
+	} else {
+		activeProgram--;
+	}
 	uploadState();
 }
 
