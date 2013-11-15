@@ -74,21 +74,26 @@ const float deadzone = 10.0f;
 
 int main()
 {
+    const PmDeviceInfo *info;
     Pm_Initialize();
-    /*int cnt = Pm_CountDevices();
+    int cnt = Pm_CountDevices();
     if(!cnt) { 
         Pm_Terminate();
         printf("No Devices.\n");
         return -1;
     }
 
-    printf("Choose Output: ")
-    for(i=0;i < cnt; i++) {
+    printf("Output \n");
+    for(int i = 0; i < cnt; i++) {
         info = Pm_GetDeviceInfo(i);
         if(info->output)
             printf("%d: %s \n", i, info->name);
-    }*/
-    int device = 2;
+    }
+
+    int device = 0;
+    printf("choose your device: ");
+    scanf("%d", &device);
+    
     Pt_Start(1, NULL, NULL);
     bool isinit = midi.initialize(device);
     if(isinit) {
