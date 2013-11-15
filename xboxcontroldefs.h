@@ -1,4 +1,6 @@
-
+/* 
+*	Author: Oscar Dragén
+*/
 
 #ifndef _XBOX_CONTROLLER_
 #define _XBOX_CONTROLLER_

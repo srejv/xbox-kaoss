@@ -1,3 +1,7 @@
+/* 
+*   Author: Oscar Dragén
+*/
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <stdio.h>
@@ -97,14 +101,27 @@ int main()
     Pt_Start(1, NULL, NULL);
     bool isinit = midi.initialize(device);
     if(isinit) {
-        printf("INITIALIZED KAOSS\n");
+        printf("Initialized the Kaossilator Pro.\n");
     }
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(300, 200), "Xbox -> KAOSS!");
     window.setJoystickThreshold(1);
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    
+    sf::Font font;
+    if (!font.loadFromFile("font/CosmicSansNeueMono.ttf"))
+    {
+        printf("Font Error :(\n");
+        Pm_Terminate();
+        return EXIT_FAILURE;
+    }
 
+
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Bring the KAOSS");
+    text.setColor(sf::Color::White);
+    text.setPosition(12,20);
+    
     while (window.isOpen())
     {
         sf::Event event;
@@ -168,7 +185,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        window.draw(text);
         window.display();
     }
 

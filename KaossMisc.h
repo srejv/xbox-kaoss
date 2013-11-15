@@ -1,3 +1,6 @@
+/* 
+*	Author: Oscar Dragén
+*/
 
 #ifndef __KAOSS_MISC__
 #define __KAOSS_MISC__

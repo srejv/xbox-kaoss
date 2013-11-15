@@ -1,3 +1,6 @@
+/* 
+*	Author: Oscar Dragén
+*/
 
 #ifndef __KAOSS_LOOPS__
 #define __KAOSS_LOOPS__

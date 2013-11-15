@@ -1,3 +1,6 @@
+/* 
+*	Author: Oscar Dragén
+*/
 
 #ifndef __KAOSS_VOLUME__
 #define __KAOSS_VOLUME__

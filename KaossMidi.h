@@ -1,3 +1,6 @@
+/* 
+*	Author: Oscar Dragén
+*/
 
 #ifndef __KAOSS_MIDI__
 #define __KAOSS_MIDI__

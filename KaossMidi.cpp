@@ -1,3 +1,6 @@
+/* 
+*	Author: Oscar Dragén
+*/
 
 #include "KaossMidi.h"
 #include "KaossMisc.h"

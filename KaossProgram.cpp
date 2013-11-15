@@ -1,3 +1,6 @@
+/* 
+*	Author: Oscar Dragén
+*/
 
 #include "KaossProgram.h"
 #include "KaossMisc.h"

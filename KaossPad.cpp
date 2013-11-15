@@ -1,6 +1,8 @@
+/* 
+*	Author: Oscar Dragén
+*/
 
 #include "KaossPad.h"
-
 #include "KaossMisc.h"
 
 KaossPad::KaossPad()

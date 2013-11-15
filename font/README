@@ -1,0 +1,44 @@
+
+                       Cosmic Sans Neue Mono
+                       =====================
+
+                       
+A programming font, designed with functionality in mind, and with some 
+wibbly-wobbly handwriting-like fuzziness that makes it unassumingly cool.
+
+Not related to other Cosmic Sans from the Internet. This one has Neue at the 
+end, and it changes everything (most notably the coolness level). The name 
+comes from my realization that at some point it looked like the mutant child of 
+Comic Sans and Helvetica Neue. Hopefully it is not the case any more.
+
+Inspirational sources include Inconsolata and Monaco. I have also been using 
+Consolas a lot, so it may have some points in common.
+
+
+Weights, variants and glyph coverage
+------------------------------------
+
+It includes some accented glyphs, but has not any kind of exhaustive coverage 
+now. It also lacks a bold version, although I will be making one soon. And it 
+also lacks a good italic version, which I plan to design later, in a fashion 
+similar to Consolas' italic version, with new glyph designs, not just an added 
+slant.
+
+
+Author and license
+------------------
+
+Created by Jany Belluz.
+Licensed under the SIL Open Font License (see OFL.txt).
+
+
+Versions
+--------
+
+1.1 - First release.
+
+1.1.1 - Make slashes longer, ensure parenthesis and brackets are rendered at the 
+        same height, and some other minor adjustments.
+
+
+
